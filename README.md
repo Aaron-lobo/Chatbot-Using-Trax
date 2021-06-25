@@ -1,0 +1,2 @@
+# Chatbot-Using-Trax
+In certain situations when human interaction is not possible, having something that can substitute for human interaction is also complementary and vital. Therefore, our project aims to develop a multi-domain voice-enabled chatbot to answer queries in a more human-like manner while maintaining extended conversations. The technologies used in this project are trax, fast math, attention, and a reformer model to implement this system.
