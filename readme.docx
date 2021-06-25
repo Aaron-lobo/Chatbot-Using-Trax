@@ -10,21 +10,22 @@ Software Requirements :
 
 Language used : Python 3 
 Steps involved :
-1: 1: First and foremost is to load all the required and important libraries to work with, importing libraries such as -The OS module in Python provides functions for interacting with the operating system. importing libraries such as Pandas/NumPy is mainly used for data analysis importing data from various allowing various data manipulation operations such as merging, reshaping, selecting, as well as data cleaning, and data wrangling features. The JSON module is mainly used to convert the python dictionary above into a JSON string that can be written into a file. While the JSON module will convert strings to Python datatypes, normally the JSON functions are used to read and write directly from JSON files. 
+1: Firstly, we load all the required and important libraries to work with, importing libraries.
 
-2: importing all the important pairs to work with such as - mostly the feature extraction and metrics pairwise, we need these feature extraction techniques to convert text into a matrix and vector of features, and we will be using these pairs to work with our model .
+2: Importing all the files that we will be using to work with our model.
 
-3: loading our corpus- Our corpus is all about history of sentences written by a customer and a representative in the past. The data is stored in a json file and using certain regex rules we will clean this data and convert this data that can be fed into our model.
-4: process and clean our data using certain python functions and regex rules we split the data , split it on punctuations , split text to rows using certain inbuilt python functions such as split text or split text to rows and after processing the data we will count the no of sentences from the representative perspective , remove duplicates and use sentences which have at least 2 words .
-5: After processing and cleaning our data, we define our model, and we are using the tfidf model - which stands for term frequency–inverse document frequency, is a numerical model that is intended to reflect how important a word is to a document in a collection or corpus. Typically, the tf-idf model is composed by two terms- 
-Normalized Term Frequency (tf) - no of times term t occurs in a document/total no of terms in a document Inverse Document Frequency (idf) - log (total number of documents)/no of documents with term t in it after calculating both term frequency and inverse document frequency, we merge their results and higher the tfidf score more frequent and signific that word or sentence is to a document/corpus.
+3: Loading our corpus/dataset - MultiWOZ -- A Large-Scale Multi-Domain Wizard-of-Oz Dataset for Task-Oriented Dialogue Modelling
 
-6: now we will use a tool known as tfidf vectorizer which comes along with the tfidf model that has something also known as the weight feature which works along the tfidf 
-score and gives weight to the most important sentences. This weight is a statistical measure used to evaluate how important a word is to a document in a collection or corpus. This weight feature is directionally proportional to the importance/significance of the sentence
-7:Last but not the least we feed all of this to a matrix known as cosine similarity matrix that is a metric which is used to determine how similar two entities are irrespective of their size. It generally works with vector weights and After the calculation of a similarity matrix based on the sklearn tfidf tool (frequency and normalization of words), we use this matrix to calculate the similarity between the new few words written by the representative and the history of messages written in the past.
- 
-8:Finally, after applying all the 8 steps, we create a user interface to take multiple inputs from the user, the autocomplete is calculating the similarity between the sentence in the data and the prefix of the sentence written by the representative. As a 
-weight feature, we chose to reorder using the frequency of the most common similar sentence. The Autocomplete will recognize the closest sentences and rank 3 final proposals based on the respective inputs.
+4: Processing the data for Reformer inputs: split the list to a train and eval dataset, Tokenizing, batching with bucketing, we will define our data pipeline for tokenizing and batching our data. We will bucket by length and also have an upper bound on the token length.
+
+5: After processing and cleaning our data, we define our model, and we are using the Reversible layers, When running large deep models, you will often run out of memory as each layer allocates memory to store activations for use in backpropagation. To save this resource, you need to be able to recompute these activations during the backward pass without storing them during the forward pass. That is why we use reversible layers. Reversible layers and randomness¶
+This is why we were are using fastmath's random functions and keys. Utilizing the same key, trax.fastmath.random.uniform() will return the same values. This is required for the backward pass to return the correct layer inputs when random noise is introduced in the layer.
+
+6: Training the ReformerLM: We will now proceed to training your model.There are two main componenets that differentiate it from the standard Transformer, LSH in and reversible layers, we use the pre-built model already implemented in Trax.
+
+7:Decoding and Word generation: returns a generator that predicts the next word of the conversation.
+
+8:Finally, we can enter in a sentence and see how the model genreates the conversation further.
 
 
 
